@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+
+
+//Hey Getch, I admit, I used your code for some pieces, but you'll also find that I changed how it all works
+
+
+
+namespace ARandomWalk
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int stepsTaken = 0;
+            int totalSteps = 0;
+            float XPosition = 0;
+            float YPosition = 0;
+            int i = 0;
+            float sumX = 0;
+            float sumY = 0;
+            Boolean done = true;
+
+            Random random = new Random();
+            Console.WriteLine("How many steps should be taken?");
+            totalSteps = Convert.ToInt32(Console.ReadLine());
+
+            while (done)
+            {
+                XPosition = 0;
+                YPosition = 0;
+                for (stepsTaken = 0; stepsTaken <= totalSteps; stepsTaken++)
+                {
+
+                    float primary = (((random.Next(100) + random.Next(100) + random.Next(50) + random.Next(50)) / 3) - random.Next(10) + random.Next(10));
+                    float secondary = ((random.Next(100) + random.Next(100))/2);
+                    
+                    if(primary == 0)
+                    {
+                        primary = primary + 1;
+                    }
+
+                    if (secondary == 0)
+                    {
+                        secondary = secondary + 1;
+                    }
+
+
+                    if(primary>50)
+                    {
+                        if( secondary > 50)
+                            { 
+                                XPosition = XPosition-1;
+                            }
+
+                        if( secondary <= 50)
+                            {
+                                XPosition = XPosition + 1;
+                            }
+                    }
+
+
+                    if (primary <= 50)
+                    {
+                        if (secondary > 50)
+                        {
+                            YPosition = YPosition - 1;
+                        }
+
+                        if (secondary <= 50)
+                        {
+                            YPosition = YPosition + 1;
+                        }
+                    }
+
+                    i++;
+                    if (i == 100)
+                        done = false;
+                    sumX += XPosition;
+                    sumY += YPosition;
+                }
+            }
+            sumX /= 100;
+            sumY /= 100;
+            Console.WriteLine("The average came out to: ({0} , {1})", sumX, sumY);
+            Console.ReadKey();
+        }
+    }
+}
